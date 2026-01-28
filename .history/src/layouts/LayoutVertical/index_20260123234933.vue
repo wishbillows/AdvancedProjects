@@ -1,0 +1,57 @@
+<template>
+  <el-row class="tac">
+    <el-col :span="24">
+      <h5 class="mb-2">欢迎</h5>
+      <el-scrollbar>
+        <el-menu
+          :default-active="activeMenu"
+          class="el-menu-vertical-demo"
+          :collapse-transition="false"
+          :router="false"
+        >
+          <SubMenu :menu-list="menuList" />
+        </el-menu>
+      </el-scrollbar>
+    </el-col>
+  </el-row>
+</template>
+
+<script lang="ts" setup>
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
+import { useRoute } from "vue-router";
+import { userTabsStore } from "@/stores/modules/tabs";
+import SubMenu from "../components/Menu/SubMenu.vue";
+const { tabsMenuList } = storeToRefs(userTabsStore());
+
+const route = useRoute();
+const menuList = computed(() => tabsMenuList.value[0]);
+const activeMenu = computed(
+  () => (route.meta.activeMenu ? route.meta.activeMenu : route.path) as string,
+);
+</script>
+
+<style lang="scss" scoped>
+.el-aside {
+  background-color: aliceblue;
+}
+.el-scrollbar {
+  width: 100%;
+  height: 100%;
+  :deep(.el-aside) {
+    width: auto;
+    background-color: var(--el-menu-bg-color);
+    border-right: 1px solid var(--el-aside-border-color);
+  }
+}
+.el-menu {
+  width: 100%;
+  overflow-x: hidden;
+  border-right: none;
+}
+.mb-2 {
+  height: 29px;
+  // font-size: 20px;
+  text-align: center;
+}
+</style>
