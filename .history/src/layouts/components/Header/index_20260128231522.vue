@@ -18,16 +18,12 @@
 <script setup lang="ts">
 import { UserFilled } from "@element-plus/icons-vue";
 import { userTabsStore } from "@/stores/modules/tabs";
-import { useRouter } from "vue-router";
-const router = useRouter();
+import { route } from "";
 defineProps(["onIsCollapse", "isCollapse"]);
 const logoOut = () => {
   console.log("点击退出");
   localStorage.removeItem("token");
   localStorage.removeItem("username");
-  router.push({
-    name: "login",
-  });
 };
 </script>
 <style lang="scss" scoped>

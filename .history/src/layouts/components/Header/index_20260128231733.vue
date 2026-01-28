@@ -25,9 +25,7 @@ const logoOut = () => {
   console.log("点击退出");
   localStorage.removeItem("token");
   localStorage.removeItem("username");
-  router.push({
-    name: "login",
-  });
+  router.push();
 };
 </script>
 <style lang="scss" scoped>
